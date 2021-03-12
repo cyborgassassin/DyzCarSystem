@@ -125,6 +125,7 @@ Citizen.CreateThread(function()
 end)
 
 Citizen.CreateThread(function()
+DisplayRadar(false);
     while true do
         playerPed = PlayerPedId();
         local veh = GetVehiclePedIsIn(playerPed, false);
@@ -132,6 +133,7 @@ Citizen.CreateThread(function()
         if (veh ~= currVeh) then
             currVeh = veh;
             triggerNUI("toggleUI", veh ~= 0);
+            DisplayRadar(false);
 
             if (veh == 0) then
                 cruiseEnabled, seatbeltEnabled = false, false;
@@ -139,6 +141,7 @@ Citizen.CreateThread(function()
             else
                 local vehicleClass = GetVehicleClass(veh);
                 vehData['hasBelt'] = isVehicleClassHasBelt(vehicleClass);
+                DisplayRadar(true);
             end
         end
 
