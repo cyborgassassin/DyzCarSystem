@@ -23,7 +23,6 @@ Citizen.CreateThread(function()
             local vehicleHealth = (EntityHealth / maxEntityHealth) * 100;
 
             SetPlayerVehicleDamageModifier(PlayerId(), 100);
-            SetVehicleEngineHealth(currVeh, (EntityHealth + 0.00) * 1.5);
 
             local maxSpeed = 100 - ((100 - ((GetVehicleEngineHealth(currVeh) / maxEntityHealth) * 100)) / 1.5);
             if (vehicleHealth <= 30) then 
@@ -45,7 +44,7 @@ Citizen.CreateThread(function()
 
             triggerNUI("updateInfo", {
                 -- Vehicle Status
-                carHealth = vehicleHealth,
+                carHealth = (GetVehicleEngineHealth(currVeh) / GetEntityMaxHealth(currVeh)) * 100,
                 carFuel = math.floor(GetVehicleFuelLevel(currVeh)),
 
                 -- Speed
